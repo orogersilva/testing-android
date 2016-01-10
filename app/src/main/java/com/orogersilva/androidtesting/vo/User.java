@@ -1,15 +1,19 @@
 package com.orogersilva.androidtesting.vo;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by azevedor on 10/01/2016.
  */
-public class User {
+public class User extends RealmObject {
 
     // region FIELDS
 
-    private String mName;
-    private String mAge;
-    private String mCity;
+    @PrimaryKey
+    private String name;
+    private String age;
+    private String city;
 
     // endregion
 
@@ -27,27 +31,27 @@ public class User {
     // region GETTERS AND SETTERS
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     private void setName(String name) {
-        mName = name;
+        this.name = name;
     }
 
     public String getAge() {
-        return mAge;
+        return age;
     }
 
     private void setAge(String age) {
-        mAge = age;
+        this.age = age;
     }
 
     public String getCity() {
-        return mCity;
+        return city;
     }
 
     private void setCity(String city) {
-        mCity = city;
+        this.city = city;
     }
 
     // endregion
