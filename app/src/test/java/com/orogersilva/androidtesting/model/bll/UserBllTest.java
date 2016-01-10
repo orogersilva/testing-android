@@ -19,6 +19,7 @@ import static org.mockito.Mockito.*;
 /**
  * Created by azevedor on 10/01/2016.
  */
+@SmallTest
 @RunWith(MockitoJUnitRunner.class)
 public class UserBllTest {
 
@@ -46,7 +47,6 @@ public class UserBllTest {
     // region TEST METHODS
 
     @Test(expected = NullPointerException.class)
-    @SmallTest
     public void addUser_whenUserIsNull_throwsNullPointerException() {
 
         // ARRANGE
@@ -57,7 +57,6 @@ public class UserBllTest {
     }
 
     @Test
-    @SmallTest
     public void addUser_whenUserIsNotNull_verifyCallToDal() {
 
         // ARRANGE
@@ -75,7 +74,6 @@ public class UserBllTest {
     }
 
     @Test
-    @SmallTest
     public void getUser_whenUserNameIsNull_returnsNull() {
 
         // ARRANGE
@@ -91,7 +89,6 @@ public class UserBllTest {
     }
 
     @Test
-    @SmallTest
     public void getUser_whenUserNameIsEmpty_returnsNull() {
 
         // ARRANGE
@@ -107,7 +104,6 @@ public class UserBllTest {
     }
 
     @Test
-    @SmallTest
     public void getUser_whenUserNameIsValid_returnsUser() {
 
         // ARRANGE
@@ -129,7 +125,6 @@ public class UserBllTest {
     }
 
     @Test(expected = NullPointerException.class)
-    @SmallTest
     public void updateUser_whenUserIsNull_throwsNullPointerException() {
 
         // ARRANGE
@@ -140,7 +135,6 @@ public class UserBllTest {
     }
 
     @Test
-    @SmallTest
     public void updateUser_whenUserIsNotNull_updateIsSuccessful() {
 
         // ARRANGE
@@ -158,7 +152,6 @@ public class UserBllTest {
     }
 
     @Test(expected = InvalidStringException.class)
-    @SmallTest
     public void removeUser_whenUserNameIsNull_throwsInvalidStringException() throws InvalidStringException {
 
         // ARRANGE
@@ -169,7 +162,6 @@ public class UserBllTest {
     }
 
     @Test(expected = InvalidStringException.class)
-    @SmallTest
     public void removeUser_whenUserNameIsEmpty_throwsInvalidStringException() throws InvalidStringException {
 
         // ARRANGE
@@ -180,7 +172,6 @@ public class UserBllTest {
     }
 
     @Test
-    @SmallTest
     public void removeUser_whenUserNameIsValid_verifyCallToDal() throws InvalidStringException {
 
         // ARRANGE
