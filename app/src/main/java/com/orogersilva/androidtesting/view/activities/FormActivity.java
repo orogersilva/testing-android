@@ -1,5 +1,6 @@
 package com.orogersilva.androidtesting.view.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
@@ -53,14 +54,20 @@ public class FormActivity extends AppCompatActivity {
         String age = mUserAgeEditText.getText().toString();
         String city = mUserCityEditText.getText().toString();
 
-        User newUser = new User(name, age, city);
+        final User newUser = new User(name, age, city);
 
         AsyncSaveUser asyncSaveUser = new AsyncSaveUser(this, newUser, new AsyncSaveUser.SaveUserCallback() {
 
             @Override
             public void onFinish() {
 
-                setResult(RESULT_OK);
+                Intent newUserIntent = new Intent();
+
+                newUserIntent.putExtra("name", newUser.getName());
+                newUserIntent.putExtra("age", newUser.getAge());
+                newUserIntent.putExtra("city", newUser.getCity());
+
+                setResult(RESULT_OK, newUserIntent);
                 finish();
             }
         });

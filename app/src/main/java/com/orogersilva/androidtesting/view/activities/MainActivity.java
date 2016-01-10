@@ -12,6 +12,7 @@ import com.orogersilva.androidtesting.R;
 import com.orogersilva.androidtesting.view.adapter.UserAdapter;
 import com.orogersilva.androidtesting.vo.User;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView.Adapter mUserAdapter;
     private RecyclerView.LayoutManager mUserLayoutManager;
+    private List<User> mUsers;
 
     @Bind(R.id.add_button)
     Button mAddButton;
@@ -49,25 +51,9 @@ public class MainActivity extends AppCompatActivity {
         mUserLayoutManager = new LinearLayoutManager(this);
         mUsersRecyclerView.setLayoutManager(mUserLayoutManager);
 
-        List<User> users  = Arrays.asList(
-                new User("Roger", "27", "Alvorada"),
-                new User("Bianca", "34", "Porto Alegre"),
-                new User("Jéssica", "22", "São Paulo"),
-                new User("Otávio", "55", "Rio de Janeiro"),
-                new User("João", "19", "Belo Horizonte"),
-                new User("Iara", "44", "Curitiba"),
-                new User("Vanda", "43", "Florianópolis"),
-                new User("Monique", "26", "Salvador"),
-                new User("Diego", "21", "Fortaleza"),
-                new User("Bruno", "25", "Belém"),
-                new User("Carlos", "23", "Niterói"),
-                new User("Mariana", "25", "Gramado"),
-                new User("Sandra", "45", "Bauru"),
-                new User("Lauro", "31", "Natal"),
-                new User("Neiva", "29", "Goiania")
-        );
+        mUsers = new ArrayList<>();
 
-        mUserAdapter = new UserAdapter(users);
+        mUserAdapter = new UserAdapter(mUsers);
         mUsersRecyclerView.setAdapter(mUserAdapter);
     }
 
@@ -81,6 +67,16 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == USER_FORM_REQUEST) {
 
             if (resultCode == RESULT_OK) {
+
+                String userName = data.getStringExtra("name");
+                String userAge = data.getStringExtra("age");
+                String userCity = data.getStringExtra("city");
+
+                User newUser = new User(userName, userAge, userCity);
+
+                mUsers.add(newUser);
+
+                mUserAdapter.notifyDataSetChanged();
 
                 Toast.makeText(this, getString(
                         R.string.save_user_successful_message), Toast.LENGTH_LONG).show();
