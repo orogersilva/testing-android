@@ -7,6 +7,7 @@ import com.orogersilva.androidtesting.vo.User;
 
 import io.realm.Realm;
 import io.realm.RealmObject;
+import io.realm.exceptions.RealmPrimaryKeyConstraintException;
 
 /**
  * Created by azevedor on 10/01/2016.
@@ -43,7 +44,7 @@ public class UserDal {
 
             mRealm.copyToRealm(user);
 
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | RealmPrimaryKeyConstraintException e) {
 
             return FAIL_OPERATION;
 
