@@ -44,5 +44,21 @@ public class UserDal {
         return user;
     }
 
+    public void updateUser(User user) {
+
+        mRealm.beginTransaction();
+        mRealm.copyToRealmOrUpdate(user);
+        mRealm.commitTransaction();
+    }
+
+    public void deleteUser(String name) {
+
+        mRealm.beginTransaction();
+
+        User user = mRealm.where(User.class).equalTo("name", name).findFirst();
+        user.removeFromRealm();
+        mRealm.commitTransaction();
+    }
+
     // endregion
 }

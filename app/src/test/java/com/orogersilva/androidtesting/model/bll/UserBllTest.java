@@ -3,6 +3,7 @@ package com.orogersilva.androidtesting.model.bll;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import com.orogersilva.androidtesting.model.dal.UserDal;
+import com.orogersilva.androidtesting.utils.exception.InvalidStringException;
 import com.orogersilva.androidtesting.vo.User;
 
 import org.junit.Before;
@@ -49,7 +50,6 @@ public class UserBllTest {
     public void addUser_whenUserIsNull_throwsNullPointerException() {
 
         // ARRANGE
-
         User nullUser = null;
 
         // ACT
@@ -61,7 +61,6 @@ public class UserBllTest {
     public void addUser_whenUserIsNotNull_verifyCallToDal() {
 
         // ARRANGE
-
         final String USER_NAME = "Roger";
         final String USER_AGE = "27";
         final String USER_CITY = "Alvorada";
@@ -80,7 +79,6 @@ public class UserBllTest {
     public void getUser_whenUserNameIsNull_returnsNull() {
 
         // ARRANGE
-
         final String NULL_USER_NAME = null;
 
         when(mUserDalMock.retrieveUser(NULL_USER_NAME)).thenReturn(null);
@@ -97,7 +95,6 @@ public class UserBllTest {
     public void getUser_whenUserNameIsEmpty_returnsNull() {
 
         // ARRANGE
-
         final String EMPTY_USER_NAME = "";
 
         when(mUserDalMock.retrieveUser(EMPTY_USER_NAME)).thenReturn(null);
@@ -114,7 +111,6 @@ public class UserBllTest {
     public void getUser_whenUserNameIsValid_returnsUser() {
 
         // ARRANGE
-
         final String FAILED_TEST_MESSAGE = "Usuário recuperado deve ser igual ao usuário esperado.";
 
         final String VALID_USER_NAME = "Roger";
@@ -130,6 +126,72 @@ public class UserBllTest {
 
         // ASSERT
         assertEquals(FAILED_TEST_MESSAGE, expectedUser, gottenValidUser);
+    }
+
+    @Test(expected = NullPointerException.class)
+    @SmallTest
+    public void updateUser_whenUserIsNull_throwsNullPointerException() {
+
+        // ARRANGE
+        User nullUser = null;
+
+        // ACT
+        mUserBll.updateUser(nullUser);
+    }
+
+    @Test
+    @SmallTest
+    public void updateUser_whenUserIsNotNull_updateIsSuccessful() {
+
+        // ARRANGE
+        final String USER_NAME = "Roger";
+        final String USER_AGE = "27";
+        final String USER_CITY = "Alvorada";
+
+        User validUser = new User(USER_NAME, USER_AGE, USER_CITY);
+
+        // ACT
+        mUserBll.updateUser(validUser);
+
+        // ASSERT
+        verify(mUserDalMock, times(1)).updateUser(validUser);
+    }
+
+    @Test(expected = InvalidStringException.class)
+    @SmallTest
+    public void removeUser_whenUserNameIsNull_throwsInvalidStringException() throws InvalidStringException {
+
+        // ARRANGE
+        final String NULL_USER_NAME = null;
+
+        // ACT
+        mUserBll.removeUser(NULL_USER_NAME);
+    }
+
+    @Test(expected = InvalidStringException.class)
+    @SmallTest
+    public void removeUser_whenUserNameIsEmpty_throwsInvalidStringException() throws InvalidStringException {
+
+        // ARRANGE
+        final String EMPTY_USER_NAME = "";
+
+        // ACT
+        mUserBll.removeUser(EMPTY_USER_NAME);
+    }
+
+    @Test
+    @SmallTest
+    public void removeUser_whenUserNameIsValid_verifyCallToDal() throws InvalidStringException {
+
+        // ARRANGE
+
+        final String VALID_USER_NAME = "Roger";
+
+        // ACT
+        mUserBll.removeUser(VALID_USER_NAME);
+
+        // ASSERT
+        verify(mUserDalMock, times(1)).deleteUser(VALID_USER_NAME);
     }
 
     // endregion

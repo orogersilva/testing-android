@@ -1,6 +1,8 @@
 package com.orogersilva.androidtesting.model.bll;
 
 import com.orogersilva.androidtesting.model.dal.UserDal;
+import com.orogersilva.androidtesting.utils.StringUtils;
+import com.orogersilva.androidtesting.utils.exception.InvalidStringException;
 import com.orogersilva.androidtesting.vo.User;
 
 /**
@@ -35,9 +37,38 @@ public class UserBll {
 
     public User getUser(String name) {
 
-        User user = mUserDal.retrieveUser(name);
+        User user = null;
+
+        try {
+
+            if (StringUtils.isNullOrEmpty(name)) {
+                throw new InvalidStringException();
+            }
+
+            user = mUserDal.retrieveUser(name);
+
+        } catch (InvalidStringException e) {
+        }
 
         return user;
+    }
+
+    public void updateUser(User user) {
+
+        if (user == null) {
+            throw new NullPointerException();
+        }
+
+        mUserDal.updateUser(user);
+    }
+
+    public void removeUser(String name) throws InvalidStringException {
+
+        if (StringUtils.isNullOrEmpty(name)) {
+            throw new InvalidStringException();
+        }
+
+        mUserDal.deleteUser(name);
     }
 
     // endregion
