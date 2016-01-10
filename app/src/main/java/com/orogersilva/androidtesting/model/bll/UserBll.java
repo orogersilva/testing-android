@@ -26,6 +26,10 @@ public class UserBll {
 
     public void addUser(User user) {
 
+        if (user == null) {
+            throw new NullPointerException();
+        }
+
         mUserDal.createUser(user);
     }
 

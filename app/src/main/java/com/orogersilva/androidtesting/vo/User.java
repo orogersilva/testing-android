@@ -19,6 +19,8 @@ public class User extends RealmObject {
 
     // region CONSTRUCTORS
 
+    public User() {}
+
     public User(String name, String age, String city) {
 
         setName(name);
@@ -34,7 +36,7 @@ public class User extends RealmObject {
         return name;
     }
 
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -42,7 +44,7 @@ public class User extends RealmObject {
         return age;
     }
 
-    private void setAge(String age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
@@ -50,7 +52,7 @@ public class User extends RealmObject {
         return city;
     }
 
-    private void setCity(String city) {
+    public void setCity(String city) {
         this.city = city;
     }
 
