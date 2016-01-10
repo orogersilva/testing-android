@@ -5,6 +5,8 @@ import android.test.suitebuilder.annotation.SmallTest;
 import com.orogersilva.androidtesting.model.dal.UserDal;
 import com.orogersilva.androidtesting.vo.User;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -23,6 +25,20 @@ public class UserBllTest {
 
     @Mock
     UserDal mUserDalMock;
+    UserBll mUserBll;
+
+    // endregion
+
+    // region TEST SETUP METHOD
+
+    @BeforeClass
+    public static void setupClass() {
+    }
+
+    @Before
+    public void setup() {
+        mUserBll = new UserBll(mUserDalMock);
+    }
 
     // endregion
 
@@ -35,10 +51,9 @@ public class UserBllTest {
         // ARRANGE
 
         User nullUser = null;
-        UserBll userBll = new UserBll(mUserDalMock);
 
         // ACT
-        userBll.addUser(nullUser);
+        mUserBll.addUser(nullUser);
     }
 
     @Test
@@ -53,10 +68,8 @@ public class UserBllTest {
 
         User validUser = new User(USER_NAME, USER_AGE, USER_CITY);
 
-        UserBll userBll = new UserBll(mUserDalMock);
-
         // ACT
-        userBll.addUser(validUser);
+        mUserBll.addUser(validUser);
 
         // ASSERT
         verify(mUserDalMock, times(1)).createUser(validUser);
@@ -72,10 +85,8 @@ public class UserBllTest {
 
         when(mUserDalMock.retrieveUser(NULL_USER_NAME)).thenReturn(null);
 
-        UserBll userBll = new UserBll(mUserDalMock);
-
         // ACT
-        User gottenNullUser = userBll.getUser(NULL_USER_NAME);
+        User gottenNullUser = mUserBll.getUser(NULL_USER_NAME);
 
         // ASSERT
         assertNull(gottenNullUser);
@@ -91,10 +102,8 @@ public class UserBllTest {
 
         when(mUserDalMock.retrieveUser(EMPTY_USER_NAME)).thenReturn(null);
 
-        UserBll userBll = new UserBll(mUserDalMock);
-
         // ACT
-        User gottenNullUser = userBll.getUser(EMPTY_USER_NAME);
+        User gottenNullUser = mUserBll.getUser(EMPTY_USER_NAME);
 
         // ASSERT
         assertNull(gottenNullUser);
@@ -116,10 +125,8 @@ public class UserBllTest {
 
         when(mUserDalMock.retrieveUser(VALID_USER_NAME)).thenReturn(expectedUser);
 
-        UserBll userBll = new UserBll(mUserDalMock);
-
         // ACT
-        User gottenValidUser = userBll.getUser(VALID_USER_NAME);
+        User gottenValidUser = mUserBll.getUser(VALID_USER_NAME);
 
         // ASSERT
         assertEquals(FAILED_TEST_MESSAGE, expectedUser, gottenValidUser);
