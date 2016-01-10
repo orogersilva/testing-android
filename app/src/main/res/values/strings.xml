@@ -3,5 +3,10 @@
     <string name="app_name">Android Testing</string>
 
     <string name="add">Adicionar</string>
+    <string name="age">Idade</string>
+    <string name="city">Cidade</string>
+    <string name="name">Nome</string>
+    <string name="save">Salvar</string>
+    <string name="save_user_successful_message">Novo usuário salvo.</string>
 
 </resources>

@@ -1,10 +1,12 @@
 package com.orogersilva.androidtesting.view.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.orogersilva.androidtesting.R;
 import com.orogersilva.androidtesting.view.adapter.UserAdapter;
@@ -15,6 +17,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.add_button)
     Button mAddButton;
+
+    final int USER_FORM_REQUEST = 1;
 
     // endregion
 
@@ -64,6 +69,33 @@ public class MainActivity extends AppCompatActivity {
 
         mUserAdapter = new UserAdapter(users);
         mUsersRecyclerView.setAdapter(mUserAdapter);
+    }
+
+    // endregion
+
+    // region OVERRIDED METHODS
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == USER_FORM_REQUEST) {
+
+            if (resultCode == RESULT_OK) {
+
+                Toast.makeText(this, getString(
+                        R.string.save_user_successful_message), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    // endregion
+
+    // region OTHER METHODS
+
+    @OnClick(R.id.add_button)
+    public void onClickAdd() {
+
+        startActivityForResult(new Intent(this, FormActivity.class), USER_FORM_REQUEST);
     }
 
     // endregion

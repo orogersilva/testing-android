@@ -1,7 +1,8 @@
 <resources>
 
+    <dimen name="form_activity_padding">8dp</dimen>
     <dimen name="main_activity_padding">8dp</dimen>
-    <dimen name="user_itemview_padding_top">12dp</dimen>
-    <dimen name="user_itemview_padding_bottom">12dp</dimen>
+    <dimen name="user_itemview_padding_top">15dp</dimen>
+    <dimen name="user_itemview_padding_bottom">15dp</dimen>
 
 </resources>
