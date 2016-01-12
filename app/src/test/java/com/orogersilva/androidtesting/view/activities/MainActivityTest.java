@@ -6,6 +6,9 @@ import android.test.suitebuilder.annotation.SmallTest;
 import com.orogersilva.androidtesting.BuildConfig;
 import com.orogersilva.androidtesting.R;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -27,24 +30,48 @@ import static org.junit.Assert.*;
 @Config(constants = BuildConfig.class, sdk = 21)
 public class MainActivityTest {
 
+    // region FIELDS
+
+    private MainActivity mMainActivity;
+
+    // endregion
+
+    // region SETUP METHODS
+
+    @Before
+    public void setup() {
+
+        mMainActivity = Robolectric.setupActivity(MainActivity.class);
+    }
+
+    // endregion
+
     // region TEST METHODS
 
     @Test
     public void clickingAddButton_shouldStartFormActivity() {
 
         // ARRANGE
-        MainActivity mainActivity = Robolectric.setupActivity(MainActivity.class);
-
-        Intent expectedIntent = new Intent(mainActivity, FormActivity.class);
+        Intent expectedIntent = new Intent(mMainActivity, FormActivity.class);
 
         // ACT
-        mainActivity.findViewById(R.id.add_button).performClick();
+        mMainActivity.findViewById(R.id.add_button).performClick();
 
-        ShadowActivity shadowMainActivity = Shadows.shadowOf(mainActivity);
+        ShadowActivity shadowMainActivity = Shadows.shadowOf(mMainActivity);
         Intent actualIntent = shadowMainActivity.getNextStartedActivity();
 
         // ASSERT
         assertTrue(actualIntent.filterEquals(expectedIntent));
+    }
+
+    // endregion
+
+    // region CLEAN UP METHODS
+
+    @After
+    public void tearDown() {
+
+        mMainActivity = null;
     }
 
     // endregion
