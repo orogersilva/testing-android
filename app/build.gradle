@@ -50,3 +50,10 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'io.realm:realm-android:0.87.2'
 }
+
+// Show test status in console.
+tasks.withType(Test) {
+    testLogging {
+        events "passed", "failed"
+    }
+}
