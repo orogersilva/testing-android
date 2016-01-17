@@ -1,6 +1,7 @@
 package com.orogersilva.androidtesting.view.activities;
 
 import android.content.Intent;
+import android.os.Build;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import com.orogersilva.androidtesting.BuildConfig;
@@ -27,7 +28,7 @@ import static org.junit.Assert.*;
  */
 @SmallTest
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
 public class MainActivityTest {
 
     // region FIELDS
