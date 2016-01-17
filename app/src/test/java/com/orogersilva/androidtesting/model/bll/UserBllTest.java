@@ -79,8 +79,6 @@ public class UserBllTest {
         // ARRANGE
         final String NULL_USER_NAME = null;
 
-        when(mUserDalMock.retrieveUser(NULL_USER_NAME)).thenReturn(null);
-
         // ACT
         User gottenNullUser = mUserBll.getUser(NULL_USER_NAME);
 
@@ -93,8 +91,6 @@ public class UserBllTest {
 
         // ARRANGE
         final String EMPTY_USER_NAME = "";
-
-        when(mUserDalMock.retrieveUser(EMPTY_USER_NAME)).thenReturn(null);
 
         // ACT
         User gottenNullUser = mUserBll.getUser(EMPTY_USER_NAME);
