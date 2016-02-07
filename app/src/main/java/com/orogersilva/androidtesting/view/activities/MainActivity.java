@@ -8,7 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
 import com.orogersilva.androidtesting.R;
+import com.orogersilva.androidtesting.net.UserNet;
 import com.orogersilva.androidtesting.view.adapter.UserAdapter;
 import com.orogersilva.androidtesting.vo.User;
 
@@ -31,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mUserLayoutManager;
     private List<User> mUsers;
 
-    @Bind(R.id.add_button)
-    Button mAddButton;
+    private UserNet mUserNet;
 
     final int USER_FORM_REQUEST = 1;
 
@@ -55,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
         mUserAdapter = new UserAdapter(mUsers);
         mUsersRecyclerView.setAdapter(mUserAdapter);
+
+        // Initializing user network module...
+        mUserNet = new UserNet(new Firebase("https://android-testing.firebaseio.com/users"));
     }
 
     // endregion
@@ -89,9 +93,17 @@ public class MainActivity extends AppCompatActivity {
     // region OTHER METHODS
 
     @OnClick(R.id.add_button)
-    public void onClickAdd() {
+    public void addUser() {
 
         startActivityForResult(new Intent(this, FormActivity.class), USER_FORM_REQUEST);
+    }
+
+    @OnClick(R.id.get_user_button)
+    public void getUsers() {
+    }
+
+    @OnClick(R.id.send_user_button)
+    public void sendUsers() {
     }
 
     // endregion

@@ -15,12 +15,31 @@
 
     </android.support.v7.widget.RecyclerView>
 
-    <Button
-        android:id="@+id/add_button"
+    <LinearLayout
+        android:id="@+id/action_buttons_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/users_recyclerView"
-        android:text="@string/add"
-        />
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/add_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add" />
+
+        <Button
+            android:id="@+id/get_user_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/get_user"/>
+
+        <Button
+            android:id="@+id/send_user_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/send_user"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
