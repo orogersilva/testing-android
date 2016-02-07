@@ -57,4 +57,6 @@ public class User extends RealmObject {
     }
 
     // endregion
+
+    // TODO: 2/7/2016 Override equals method when Realm to allow.
 }

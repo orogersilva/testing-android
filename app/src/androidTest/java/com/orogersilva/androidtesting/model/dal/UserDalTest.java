@@ -1,5 +1,6 @@
 package com.orogersilva.androidtesting.model.dal;
 
+import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.MediumTest;
@@ -7,9 +8,13 @@ import android.test.suitebuilder.annotation.MediumTest;
 import com.orogersilva.androidtesting.vo.User;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import io.realm.Realm;
 
 import static org.junit.Assert.*;
 
@@ -22,16 +27,22 @@ public class UserDalTest {
 
     // region FIELDS
 
-    UserDal mUserDal;
+    private static Context mContext;
+    private static UserDal mUserDal;
 
     // endregion
 
-    // region SETUP METHOD
+    // region SETUP METHODS
+
+    @BeforeClass
+    public static void setupClass() {
+
+        mContext = InstrumentationRegistry.getTargetContext().getApplicationContext();
+        mUserDal = new UserDal(mContext);
+    }
 
     @Before
     public void setup() {
-
-        mUserDal = new UserDal(InstrumentationRegistry.getTargetContext().getApplicationContext());
     }
 
     // endregion
@@ -95,12 +106,82 @@ public class UserDalTest {
         assertEquals(SECOND_FAILED_TEST_MESSAGE, UserDal.FAIL_OPERATION, secondOperationResultStatus);
     }
 
-    // region CLEAN UP METHOD
+    @Test
+    public void retrieveUser_whenNameIsNull_returnsNull() {
+
+        // ARRANGE
+        final String NULL_NAME = null;
+
+        // ACT
+        User nullUser = mUserDal.retrieveUser(NULL_NAME);
+
+        // ASSERT
+        assertNull(nullUser);
+    }
+
+    @Test
+    public void retrieveUser_whenNameIsEmpty_returnsNull() {
+
+        // ARRANGE
+        final String EMPTY_NAME = null;
+
+        // ACT
+        User nullUser = mUserDal.retrieveUser(EMPTY_NAME);
+
+        // ASSERT
+        assertNull(nullUser);
+    }
+
+    @Test
+    public void retrieveUser_whenNameNotExists_returnsNull() {
+
+        // ARRANGE
+
+        final String NAME = "Roger";
+
+        // ACT
+        User retrievedUser = mUserDal.retrieveUser(NAME);
+
+        // ASSERT
+        assertNull(retrievedUser);
+    }
+
+    @Test
+    public void retrieveUser_whenNameExists_returnsUser() {
+
+        // ARRANGE
+
+        final String USER_NAME = "Roger";
+        final String USER_AGE = "27";
+        final String USER_CITY = "Alvorada";
+
+        User user = new User(USER_NAME, USER_AGE, USER_CITY);
+
+        Realm realm = Realm.getInstance(mContext);
+
+        realm.beginTransaction();
+        realm.copyToRealm(user);
+        realm.commitTransaction();
+
+        // ACT
+        User retrievedUser = mUserDal.retrieveUser(USER_NAME);
+
+        // ASSERT
+        assertEquals(user.getName(), retrievedUser.getName());
+        assertEquals(user.getAge(), retrievedUser.getAge());
+        assertEquals(user.getCity(), retrievedUser.getCity());
+    }
+
+    // region CLEAN UP METHODS
 
     @After
     public void teardown() {
 
         mUserDal.clearDatabase();
+    }
+
+    @AfterClass
+    public static void teardownClass() {
 
         mUserDal = null;
     }

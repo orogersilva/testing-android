@@ -3,6 +3,7 @@ package com.orogersilva.androidtesting.model.dal;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 
+import com.orogersilva.androidtesting.utils.StringUtils;
 import com.orogersilva.androidtesting.vo.User;
 
 import io.realm.Realm;
@@ -58,7 +59,12 @@ public class UserDal {
 
     public User retrieveUser(String name) {
 
-        User user = mRealm.where(User.class).equalTo("name", name).findFirst();
+        User user = null;
+
+        if (!StringUtils.isNullOrEmpty(name)) {
+
+            user = mRealm.where(User.class).equalTo("name", name).findFirst();
+        }
 
         return user;
     }
