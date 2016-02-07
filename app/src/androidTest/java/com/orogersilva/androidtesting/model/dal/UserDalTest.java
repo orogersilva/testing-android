@@ -150,7 +150,6 @@ public class UserDalTest {
     public void retrieveUser_whenNameExists_returnsUser() {
 
         // ARRANGE
-
         final String USER_NAME = "Roger";
         final String USER_AGE = "27";
         final String USER_CITY = "Alvorada";
@@ -170,6 +169,123 @@ public class UserDalTest {
         assertEquals(user.getName(), retrievedUser.getName());
         assertEquals(user.getAge(), retrievedUser.getAge());
         assertEquals(user.getCity(), retrievedUser.getCity());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void updateUser_whenUserIsNull_throwsIllegalArgumentException() {
+
+        // ARRANGE
+        final User nullUser = null;
+
+        // ACT / ASSERT
+        mUserDal.updateUser(nullUser);
+    }
+
+    @Test
+    public void updateUser_whenUserNotExists_CreateUser() {
+
+        // ARRANGE
+        final String USER_NAME = "Roger";
+        final String USER_AGE = "27";
+        final String USER_CITY = "Alvorada";
+
+        User newUser = new User(USER_NAME, USER_AGE, USER_CITY);
+
+        // ACT
+        mUserDal.updateUser(newUser);
+
+        // ASSERT
+        Realm realm = Realm.getInstance(mContext);
+
+        User retrievedUser = realm.where(User.class).equalTo("name", USER_NAME).findFirst();
+
+        assertEquals(newUser.getName(), retrievedUser.getName());
+        assertEquals(newUser.getAge(), retrievedUser.getAge());
+        assertEquals(newUser.getCity(), retrievedUser.getCity());
+    }
+
+    @Test
+    public void updateUser_whenUserExists_updateIsSuccessFul() {
+
+        // ARRANGE
+        final String USER_NAME = "Roger";
+        final String USER_AGE = "27";
+        final String USER_CITY = "Alvorada";
+
+        User user = new User(USER_NAME, USER_AGE, USER_CITY);
+
+        Realm realm = Realm.getInstance(mContext);
+
+        realm.beginTransaction();
+        realm.copyToRealm(user);
+        realm.commitTransaction();
+
+        user.setAge("32");
+
+        // ACT
+        mUserDal.updateUser(user);
+
+        // ASSERT
+        User retrievedUser = realm.where(User.class).equalTo("name", user.getName()).findFirst();
+
+        assertEquals(user.getName(), retrievedUser.getName());
+        assertEquals(user.getAge(), retrievedUser.getAge());
+        assertEquals(user.getCity(), retrievedUser.getCity());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void deleteUser_whenNameIsNull_abcde() {
+
+        // ARRANGE
+        final String NULL_NAME = null;
+
+        // ACT / ASSERT
+        mUserDal.deleteUser(NULL_NAME);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void deleteUser_whenNameIsEmpty_throwsNullPointerException() {
+
+        // ARRANGE
+        final String EMPTY_NAME = "";
+
+        // ACT / ASSERT
+        mUserDal.deleteUser(EMPTY_NAME);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void deleteUser_whenNameNotExists_throwsNullPointerException() {
+
+        // ARRANGE
+        final String NAME = "Roger";
+
+        // ACT / ASSERT
+        mUserDal.deleteUser(NAME);
+    }
+
+    @Test
+    public void deleteUser_whenNameExists_deleteIsSuccessful() {
+
+        // ARRANGE
+        final String USER_NAME = "Roger";
+        final String USER_AGE = "27";
+        final String USER_CITY = "Alvorada";
+
+        User newUser = new User(USER_NAME, USER_AGE, USER_CITY);
+
+        Realm realm = Realm.getInstance(mContext);
+
+        realm.beginTransaction();
+        realm.copyToRealm(newUser);
+        realm.commitTransaction();
+
+        // ACT
+        mUserDal.deleteUser(USER_NAME);
+
+        // ASSERT
+        User retrievedUser = realm.where(User.class).equalTo("name", USER_NAME).findFirst();
+
+        assertNull(retrievedUser);
     }
 
     // region CLEAN UP METHODS

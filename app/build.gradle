@@ -27,6 +27,8 @@ android {
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
+
+    useLibrary 'org.apache.http.legacy'
 }
 
 dependencies {

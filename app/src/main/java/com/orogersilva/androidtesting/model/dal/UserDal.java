@@ -69,20 +69,41 @@ public class UserDal {
         return user;
     }
 
-    public void updateUser(User user) {
+    public void updateUser(User user) throws IllegalArgumentException {
 
         mRealm.beginTransaction();
-        mRealm.copyToRealmOrUpdate(user);
-        mRealm.commitTransaction();
+
+        try {
+
+            mRealm.copyToRealmOrUpdate(user);
+
+        } catch (IllegalArgumentException e) {
+
+            throw e;
+
+        } finally {
+
+            mRealm.commitTransaction();
+        }
     }
 
     public void deleteUser(String name) {
 
         mRealm.beginTransaction();
 
-        User user = mRealm.where(User.class).equalTo("name", name).findFirst();
-        user.removeFromRealm();
-        mRealm.commitTransaction();
+        try {
+
+            User user = mRealm.where(User.class).equalTo("name", name).findFirst();
+            user.removeFromRealm();
+
+        } catch (IllegalArgumentException | NullPointerException e) {
+
+            throw e;
+
+        } finally {
+
+            mRealm.commitTransaction();
+        }
     }
 
     // endregion
