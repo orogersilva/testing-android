@@ -33,5 +33,20 @@ public class UserNet {
     }
 
     public void sendUsers(List<User> users) {
+
+        Map<String, Map<String, Object>> usersMap= new HashMap<String, Map<String, Object>>();
+
+        for (User user : users) {
+
+            Map<String, Object> userMap = new HashMap<String, Object>();
+
+            userMap.put("name", user.getName());
+            userMap.put("age", user.getAge());
+            userMap.put("city", user.getCity());
+
+            usersMap.put(user.getName(), userMap);
+
+            mFirebaseUser.setValue(usersMap);
+        }
     }
 }

@@ -5,17 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Button;
 import android.widget.Toast;
 
-import com.firebase.client.Firebase;
 import com.orogersilva.androidtesting.R;
-import com.orogersilva.androidtesting.net.UserNet;
+import com.orogersilva.androidtesting.async.AsyncSendUser;
 import com.orogersilva.androidtesting.view.adapter.UserAdapter;
 import com.orogersilva.androidtesting.vo.User;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
@@ -32,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter mUserAdapter;
     private RecyclerView.LayoutManager mUserLayoutManager;
     private List<User> mUsers;
-
-    private UserNet mUserNet;
 
     final int USER_FORM_REQUEST = 1;
 
@@ -56,9 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
         mUserAdapter = new UserAdapter(mUsers);
         mUsersRecyclerView.setAdapter(mUserAdapter);
-
-        // Initializing user network module...
-        mUserNet = new UserNet(new Firebase("https://android-testing.firebaseio.com/users"));
     }
 
     // endregion
@@ -92,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     // region OTHER METHODS
 
-    @OnClick(R.id.add_button)
+    @OnClick(R.id.add_user_button)
     public void addUser() {
 
         startActivityForResult(new Intent(this, FormActivity.class), USER_FORM_REQUEST);
@@ -104,6 +96,20 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.send_user_button)
     public void sendUsers() {
+
+        AsyncSendUser asyncSendUser = new AsyncSendUser(mUsers, new AsyncSendUser.SendUserCallback() {
+
+            @Override
+            public void onFinish() {
+
+                mUsers.clear();
+                mUserAdapter.notifyDataSetChanged();
+
+                Toast.makeText(getBaseContext(), "Usuários enviados.", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        asyncSendUser.execute();
     }
 
     // endregion
