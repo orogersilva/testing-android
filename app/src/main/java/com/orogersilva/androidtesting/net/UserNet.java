@@ -1,6 +1,9 @@
 package com.orogersilva.androidtesting.net;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.orogersilva.androidtesting.vo.User;
 
 import java.util.HashMap;
@@ -27,10 +30,7 @@ public class UserNet {
 
     // endregion
 
-    public List<User> getUsers() {
-
-        return null;
-    }
+    // region GETTERS AND SETTERS
 
     public void sendUsers(List<User> users) {
 
@@ -49,4 +49,6 @@ public class UserNet {
             mFirebaseUser.setValue(usersMap);
         }
     }
+
+    // endregion
 }

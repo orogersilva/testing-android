@@ -16,6 +16,7 @@ public class AsyncSendUser extends AsyncTask<Void, Void, Void> {
 
     // region FIELDS
 
+    private UserNet mUserNet;
     private List<User> mUsers;
     private SendUserCallback mCallback;
 
@@ -31,7 +32,8 @@ public class AsyncSendUser extends AsyncTask<Void, Void, Void> {
 
     // region CONSTRUCTORS
 
-    public AsyncSendUser(List<User> users, SendUserCallback callback) {
+    public AsyncSendUser(UserNet userNet, List<User> users, SendUserCallback callback) {
+        mUserNet = userNet;
         mUsers = users;
         mCallback = callback;
     }
@@ -43,9 +45,7 @@ public class AsyncSendUser extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
 
-        UserNet userNet = new UserNet(new Firebase("https://android-testing.firebaseio.com/users"));
-
-        userNet.sendUsers(mUsers);
+        mUserNet.sendUsers(mUsers);
 
         return null;
     }

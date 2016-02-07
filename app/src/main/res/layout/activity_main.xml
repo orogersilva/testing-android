@@ -29,12 +29,6 @@
             android:text="@string/add" />
 
         <Button
-            android:id="@+id/get_user_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/get_user"/>
-
-        <Button
             android:id="@+id/send_user_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
