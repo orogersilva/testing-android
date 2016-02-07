@@ -6,6 +6,8 @@ import com.orogersilva.androidtesting.model.dal.UserDal;
 import com.orogersilva.androidtesting.utils.exception.InvalidStringException;
 import com.orogersilva.androidtesting.vo.User;
 
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -31,14 +33,11 @@ public class UserBllTest {
 
     // endregion
 
-    // region TEST SETUP METHOD
-
-    @BeforeClass
-    public static void setupClass() {
-    }
+    // region SETUP METHODS
 
     @Before
     public void setup() {
+
         mUserBll = new UserBll(mUserDalMock);
     }
 
@@ -171,7 +170,6 @@ public class UserBllTest {
     public void removeUser_whenUserNameIsValid_verifyCallToDal() throws InvalidStringException {
 
         // ARRANGE
-
         final String VALID_USER_NAME = "Roger";
 
         // ACT
@@ -179,6 +177,16 @@ public class UserBllTest {
 
         // ASSERT
         verify(mUserDalMock, times(1)).deleteUser(VALID_USER_NAME);
+    }
+
+    // endregion
+
+    // region TEARDOWN METHODS
+
+    @After
+    public void teardown() {
+
+        mUserBll = null;
     }
 
     // endregion
