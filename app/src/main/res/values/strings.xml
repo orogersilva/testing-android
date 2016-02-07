@@ -1,12 +1,20 @@
 <resources>
 
+    <!-- App's name -->
     <string name="app_name">Android Testing</string>
 
+    <!-- Button's descriptions -->
     <string name="add">Adicionar</string>
+    <string name="get_user">Obter usuários</string>
+    <string name="save">Salvar</string>
+    <string name="send_user">Enviar usuários</string>
+
+    <!-- Labels -->
     <string name="age">Idade</string>
     <string name="city">Cidade</string>
     <string name="name">Nome</string>
-    <string name="save">Salvar</string>
+
+    <!-- Messages -->
     <string name="save_user_successful_message">Novo usuário salvo.</string>
 
 </resources>

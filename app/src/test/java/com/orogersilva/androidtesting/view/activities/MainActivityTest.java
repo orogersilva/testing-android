@@ -9,7 +9,6 @@ import com.orogersilva.androidtesting.R;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -18,7 +17,6 @@ import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 
-import static org.hamcrest.MatcherAssert.*;
 import static org.junit.Assert.assertThat;
 import static org.robolectric.Shadows.shadowOf;
 import static org.junit.Assert.*;
@@ -56,7 +54,7 @@ public class MainActivityTest {
         Intent expectedIntent = new Intent(mMainActivity, FormActivity.class);
 
         // ACT
-        mMainActivity.findViewById(R.id.add_button).performClick();
+        mMainActivity.findViewById(R.id.add_user_button).performClick();
 
         ShadowActivity shadowMainActivity = Shadows.shadowOf(mMainActivity);
         Intent actualIntent = shadowMainActivity.getNextStartedActivity();
