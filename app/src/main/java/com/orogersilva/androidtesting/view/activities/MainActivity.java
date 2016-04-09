@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     // region FIELDS
 
-    @Bind(R.id.users_recyclerView)
+    @Bind(R.id.friends_recyclerView)
     RecyclerView mUsersRecyclerView;
 
     private RecyclerView.Adapter mUserAdapter;
@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+
+        setTitle(getString(R.string.friends));
 
         mUserNet = new UserNet(new Firebase("https://android-testing.firebaseio.com/users"));
 

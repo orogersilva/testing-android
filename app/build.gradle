@@ -10,7 +10,7 @@ android {
     defaultConfig {
 
         applicationId "com.orogersilva.androidtesting"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -37,21 +37,33 @@ dependencies {
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:design:23.1.1'
+    compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.android.support:support-annotations:23.1.1'
+
     androidTestCompile 'com.android.support:support-annotations:23.1.1'
-    androidTestCompile 'com.android.support.test:runner:0.4.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.1'
     androidTestCompile 'com.android.support.test:rules:0.4.1'
+    androidTestCompile 'com.android.support.test:runner:0.4.1'
+    androidTestCompile 'org.hamcrest:hamcrest-library:1.3'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.+'
     testCompile 'org.hamcrest:hamcrest-library:1.1'
     testCompile "org.robolectric:robolectric:3.0"
 
-    compile 'com.android.support:recyclerview-v7:23.0.+'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'io.realm:realm-android:0.87.2'
     compile 'com.firebase:firebase-client-android:2.5.0+'
+
+    // Adding library to interact with RecyclerView in Espresso...
+    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.0') {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude module: 'recyclerview-v7'
+    }
 }
 
 // Show test status in console.

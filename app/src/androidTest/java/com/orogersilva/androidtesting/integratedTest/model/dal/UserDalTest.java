@@ -1,10 +1,11 @@
-package com.orogersilva.androidtesting.model.dal;
+package com.orogersilva.androidtesting.integratedTest.model.dal;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.MediumTest;
 
+import com.orogersilva.androidtesting.model.dal.UserDal;
 import com.orogersilva.androidtesting.vo.User;
 
 import org.junit.After;

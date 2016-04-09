@@ -7,11 +7,12 @@
     <string name="add">Adicionar</string>
     <string name="get_user">Obter usuários</string>
     <string name="save">Salvar</string>
-    <string name="send_user">Enviar usuários</string>
+    <string name="send">Enviar</string>
 
     <!-- Labels -->
     <string name="age">Idade</string>
     <string name="city">Cidade</string>
+    <string name="friends">Amigos</string>
     <string name="name">Nome</string>
 
     <!-- Messages -->
