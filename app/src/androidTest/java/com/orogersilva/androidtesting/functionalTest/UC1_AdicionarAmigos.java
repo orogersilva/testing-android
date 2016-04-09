@@ -52,11 +52,11 @@ public class UC1_AdicionarAmigos {
     // region TEST METHODS
 
     @Test
-    public void dadoQueNaoExistemAmigosAinda_quandoEuAdicionoUmNovoAmigo_entaoUmaNovaLinhaEhMostradaNaLista() {
+    public void dadoQueNaoExistamAmigosNaListaAinda_quandoEuAdicionoUmNovoAmigo_entaoEsseAmigoEhRegistradoNaLista() {
 
         // ARRANGE
         final String FRIEND_NAME = "Roger";
-        final String FRIEND_AGE = "27";
+        final String FRIEND_AGE = "28";
         final String FRIEND_CITY = "Alvorada";
 
         final int EXPECTED_FRIENDS_COUNT = 1;
