@@ -10,6 +10,7 @@
     <string name="send">Enviar</string>
 
     <!-- Labels -->
+    <string name="add_friend">Adicionar amigo</string>
     <string name="age">Idade</string>
     <string name="city">Cidade</string>
     <string name="friends">Amigos</string>

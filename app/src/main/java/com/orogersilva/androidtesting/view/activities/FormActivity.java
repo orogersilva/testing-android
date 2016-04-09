@@ -41,6 +41,8 @@ public class FormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_form);
 
         ButterKnife.bind(this);
+
+        setTitle(getString(R.string.add_friend));
     }
 
     // endregion
