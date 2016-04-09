@@ -52,7 +52,7 @@ public class UC1_AdicionarAmigos {
     // region TEST METHODS
 
     @Test
-    public void dadoQueNaoExistamAmigosNaListaAinda_quandoEuAdicionoUmNovoAmigo_entaoEsseAmigoEhRegistradoNaLista() {
+    public void dadoQueNaoExistemAmigosNaListaAinda_quandoEuAdicionoUmNovoAmigo_entaoEsseAmigoEhRegistradoNaLista() {
 
         // ARRANGE
         final String FRIEND_NAME = "Roger";
