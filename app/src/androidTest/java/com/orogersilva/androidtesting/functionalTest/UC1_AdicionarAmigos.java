@@ -51,6 +51,12 @@ public class UC1_AdicionarAmigos {
 
     // region TEST METHODS
 
+    /**
+     * CENÁRIO: Inserção de amigo em lista vazia
+     * DADO que não existem amigos na lista ainda
+     * QUANDO eu adiciono um novo amigo
+     * ENTÃO esse amigo é registrado na lista.
+     */
     @Test
     public void dadoQueNaoExistemAmigosNaListaAinda_quandoEuAdicionoUmNovoAmigo_entaoEsseAmigoEhRegistradoNaLista() {
 
