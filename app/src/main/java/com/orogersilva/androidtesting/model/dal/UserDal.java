@@ -47,12 +47,12 @@ public class UserDal {
 
         } catch (IllegalArgumentException | RealmPrimaryKeyConstraintException e) {
 
+            mRealm.cancelTransaction();
+
             return FAIL_OPERATION;
-
-        } finally {
-
-            mRealm.commitTransaction();
         }
+
+        mRealm.commitTransaction();
 
         return SUCCESS_OPERATION;
     }
@@ -79,12 +79,12 @@ public class UserDal {
 
         } catch (IllegalArgumentException e) {
 
+            mRealm.cancelTransaction();
+
             throw e;
-
-        } finally {
-
-            mRealm.commitTransaction();
         }
+
+        mRealm.commitTransaction();
     }
 
     public void deleteUser(String name) {
@@ -98,19 +98,28 @@ public class UserDal {
 
         } catch (IllegalArgumentException | NullPointerException e) {
 
+            mRealm.cancelTransaction();
+
             throw e;
-
-        } finally {
-
-            mRealm.commitTransaction();
         }
+
+        mRealm.commitTransaction();
     }
 
     // endregion
 
     // region OTHER METHODS
 
+    public void resetDatabase() {
+
+        if (mRealm != null && mRealm.isInTransaction()) {
+            mRealm.cancelTransaction();
+        }
+    }
+
     public void clearDatabase() {
+
+        resetDatabase();
 
         mRealm.beginTransaction();
         mRealm.where(User.class).findAll().clear();

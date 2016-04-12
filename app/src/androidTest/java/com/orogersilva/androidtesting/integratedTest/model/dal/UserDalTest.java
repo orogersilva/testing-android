@@ -40,10 +40,14 @@ public class UserDalTest {
 
         mContext = InstrumentationRegistry.getTargetContext().getApplicationContext();
         mUserDal = new UserDal(mContext);
+
+        mUserDal.clearDatabase();
     }
 
     @Before
     public void setup() {
+
+        mUserDal.resetDatabase();
     }
 
     // endregion

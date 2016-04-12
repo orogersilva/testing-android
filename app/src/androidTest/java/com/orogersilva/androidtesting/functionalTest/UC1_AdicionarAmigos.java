@@ -20,7 +20,7 @@ import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
-import static com.orogersilva.androidtesting.functionalTest.RecyclerViewAssertions.*;
+import static com.orogersilva.androidtesting.functionalTest.customviewassertions.RecyclerViewAssertions.*;
 
 /**
  * Created by orogersilva on 4/9/2016.
@@ -35,16 +35,12 @@ public class UC1_AdicionarAmigos {
     public ActivityTestRule<MainActivity> mMainActivityRule =
             new ActivityTestRule<>(MainActivity.class);
 
-    private MainActivity mMainActivity;
-
     // endregion
 
     // region SETUP
 
     @Before
     public void setup() {
-
-        mMainActivity = mMainActivityRule.getActivity();
     }
 
     // endregion
