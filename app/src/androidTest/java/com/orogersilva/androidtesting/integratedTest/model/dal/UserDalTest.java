@@ -69,8 +69,6 @@ public class UserDalTest {
         assertEquals(FAILED_TEST_MESSAGE, UserDal.FAIL_OPERATION, operationResultStatus);
     }
 
-    // endregion
-
     @Test
     public void createUser_whenUserIsNotNull_returnsSuccessfulOperationStatus() {
 
@@ -292,6 +290,8 @@ public class UserDalTest {
 
         assertNull(retrievedUser);
     }
+
+    // endregion
 
     // region CLEAN UP METHODS
 
